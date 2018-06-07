@@ -1,0 +1,17 @@
+approvals:
+    minimum: 1
+
+specification:
+    title:
+        minimum-length:
+            enabled: true
+            length: 8
+    body:
+        minimum-length:
+            enabled: true
+            length: 8
+        contains-url: false
+        contains-issue-number: true
+        template:
+            differs-from-body: true
+

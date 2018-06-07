@@ -8,7 +8,7 @@ describe( "Babel functionalities #lib", function()
 
         babel = require "babel"
         babel.init( {
-            locale = "fr-FR"
+            locale = "fr_FR"
         } )
 
         ---
@@ -24,6 +24,30 @@ describe( "Babel functionalities #lib", function()
         it ( "_ shortcut is available in clean environement", function()
             assert.same( _, babel.translate )
         end)
+
+    end)
+
+    describe( "Load locale from OS", function()
+
+        auto_babel = babel.init()
+
+        -- Locale have been set to "eo_EO" in the .travis_setup.sh script 
+        assert.same( babel.getOSLocale(), "eo_EO")
+
+    end)
+
+    describe( "Don't load translations on empty locale", function()
+    
+        local before = babel.dictionary
+        
+        babel.switchToLocale( "" )
+        assert.same( babel.dictionary, before )
+
+        babel.switchToLocale( false )
+        assert.same( babel.dictionary, before )
+
+        babel.switchToLocale( nil )
+        assert.same( babel.dictionary, before )
 
     end)
 
